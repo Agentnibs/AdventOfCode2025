@@ -13,12 +13,13 @@ namespace AdventOfCode2025
     {
         public static void Main(string[] args)
         {
-            Day1 day1 = new Day1();
-            day1.Initialize(@"C:\Users\AlexC\OneDrive\Documents\Code\AdventOfCode\2025\testdata\Day1\input.txt");
+            // Day1 day1 = new Day1();
+            // day1.Initialize(@"C:\Users\AlexC\OneDrive\Documents\Code\AdventOfCode\2025\testdata\Day1\input.txt");
 
 
-            // var list = day2.ReadFileAndReturnListOfStrings();
-            //day2.SomeMethod(list);
+            Day2 day2 = new Day2();
+            var list = day2.ReadFileAndReturnListOfStrings();
+            day2.SomeMethod(list);
         }
     }
 

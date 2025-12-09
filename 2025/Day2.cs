@@ -34,7 +34,7 @@ namespace AdventOfCode2025
             List<string> lines = new List<string>();
             try
             {
-                using (StreamReader sr = new StreamReader(@"C:\Users\AlexC\OneDrive\Documents\Code\AdventOfCode2025\day2input.txt"))
+                using (StreamReader sr = new StreamReader(@"C:\Users\AlexC\OneDrive\Documents\Code\AdventOfCode\2025\testdata\Day2\day2input.txt"))
                 {                
                     string line;
                     while ((line = sr.ReadLine()) != null)
@@ -65,27 +65,76 @@ namespace AdventOfCode2025
                 var startingValue = long.Parse(id.Split('-')[0]);
                 var endingValue = long.Parse(id.Split('-')[1]);
 
+                //Notes for myself
+                //a range is given as two numbers separated by a hyphen
+                //I split the string to get a starting and ending value
+                //I loop from starting to ending value inclusive
+                //for each value, I convert to a string I get the length of the string
+                //if the length is odd, I skip it because it can't be made of a sequence repeated twice
+                //if the length is even, I split the string in half
+                //I compare the first half to the second half
+                //if they are the same, I add the number to the list of invalid IDs
                 for (long i = startingValue; i <= endingValue; i++)
                 {
+                     var idString = i.ToString();
+                     var length = idString.Length;
 
-                    var idString = i.ToString();
-                    var length = idString.Length;
+                    //Ok so now any sequence of digits that is repeated twice makes an invalid ID
 
-                    if (length % 2 != 0)
+                    //so maybe we can start by looking for sequences where all the numbers are the same, to remove them from the pile
+                    //like 11, 22, 3333, 4444, 555555, etc
+                    //check if distinct count is 1
+                    // if (idString.Distinct().Count() == 1)
+                    // {
+                    //     Console.WriteLine($"Invalid ID found: {idString}");
+                    //     ListOfInvalidIDs.Add(i);
+                    //     continue;
+                    // }
+
+                    //get the factors of the length
+                    var factors = new List<int>();
+                    for (int f = 1; f <= length / 2; f++)
                     {
-                        //odd length IDs cannot be made of a sequence repeated twice
-                        continue;
+                        if (length % f == 0)
+                        {
+                            factors.Add(f);
+                        }
                     }
 
-                    var halfLength = length / 2;
-                    var firstHalf = idString.Substring(0, halfLength);
-                    var secondHalf = idString.Substring(halfLength);
-
-                    if (firstHalf == secondHalf)
+                    //use the factors to check for repated factors, from smallest to largest
+                    bool isInvalid = false;
+                    foreach (var factor in factors)
                     {
-                        Console.WriteLine($"Invalid ID found: {idString}");
-                        ListOfInvalidIDs.Add(i);
+                        var segment = idString.Substring(0, factor);
+                        var repeatedSegment = string.Concat(Enumerable.Repeat(segment, length / factor));
+                        if (repeatedSegment == idString)
+                        {
+                            Console.WriteLine($"Invalid ID found: {idString}");
+                            ListOfInvalidIDs.Add(i);
+                            isInvalid = true;
+                            break;
+                        }
                     }
+
+
+                    
+                    //check if length is odd
+                    // if (length % 2 != 0)
+                    // {
+                    //     //odd length IDs cannot be made of a sequence repeated twice
+                    //     continue;
+                    // }
+
+
+                    // var halfLength = length / 2;
+                    // var firstHalf = idString.Substring(0, halfLength);
+                    // var secondHalf = idString.Substring(halfLength);
+
+                    // if (firstHalf == secondHalf)
+                    // {
+                    //     Console.WriteLine($"Invalid ID found: {idString}");
+                    //     ListOfInvalidIDs.Add(i);
+                    // }
                 }
             }
 
