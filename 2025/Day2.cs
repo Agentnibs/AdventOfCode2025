@@ -3,6 +3,8 @@
 //find invalid IDs by identifying if the ID is made only of some sequence of digits repeated twice
 //So, 55 (5 twice), 6464 (64 twice), and 123123 (123 twice) would all be invalid IDs.
 
+using AdventOfCode._2025.Helpers;
+
 namespace AdventOfCode2025
 {
 
@@ -29,37 +31,14 @@ namespace AdventOfCode2025
         List<long> ListOfInvalidIDs = new List<long>();
 
 
-    public List<string> ReadFileAndReturnListOfStrings()
+ 
+
+
+
+        public void Day2Solved()
         {
-            List<string> lines = new List<string>();
-            try
-            {
-                using (StreamReader sr = new StreamReader(@"C:\Users\AlexC\OneDrive\Documents\Code\AdventOfCode\2025\testdata\Day2\day2input.txt"))
-                {                
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        var array = line.Split(',');
-                        foreach (var item in array)
-                        {
-                            lines.Add(item.Trim());
-                        }
-                        
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
-            return lines;
-        }
+            var listOfIDRanges = Helpers.ReadFileAndReturnListOfStrings(@"C:\Users\AlexC\OneDrive\Documents\Code\AdventOfCode\2025\testdata\Day2\day2input.txt");
 
-
-
-        public void SomeMethod(List<string> listOfIDRanges)
-        {
             foreach (var id in listOfIDRanges)
             {
                 var startingValue = long.Parse(id.Split('-')[0]);

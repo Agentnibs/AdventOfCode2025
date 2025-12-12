@@ -17,9 +17,11 @@ namespace AdventOfCode2025
             // day1.Initialize(@"C:\Users\AlexC\OneDrive\Documents\Code\AdventOfCode\2025\testdata\Day1\input.txt");
 
 
-            Day2 day2 = new Day2();
-            var list = day2.ReadFileAndReturnListOfStrings();
-            day2.SomeMethod(list);
+            // Day2 day2 = new Day2();   
+            // day2.Day2Solved();
+
+            Day3 day3 = new Day3();
+            day3.Part1();
         }
     }
 
